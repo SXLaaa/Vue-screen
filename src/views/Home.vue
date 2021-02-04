@@ -7,9 +7,20 @@
 <template>
   <div class="home-container">
   	<div class="wrap" ref="editor">
-      <div class="top"></div>
-      <sinan />
+      <div class="top">
+        <div class="top-button1">监控地图</div>
+        <div class="top-button2">人员地图</div>
+      </div>
+      <!-- 社区报警 -->
+      <sinan/>
+      <!-- 报警数量 -->
+      <alarmNumber/>
+      <!-- 视频监控 -->
       <seamless />
+      <!-- 智能邀约 -->
+      <smartVisite/>
+      <!-- 图例 -->
+      <lengend/>
       <pyramid />
     </div>
     
@@ -66,10 +77,22 @@ export default {
       width: 100%; 
       height: 80px; 
       background-color: transparent; 
-      background: url(../assets/img/top_nav.png) no-repeat; 
-      background-position: 65% 0;
+      background: url(../assets/navBar.png) no-repeat center; 
+      background-size:60% 70%;
+      // background-position: 65% 0;
       border: none; 
       overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 20px;
+      &-button1{
+        margin-right: 30px;
+      }
+      &-button2{
+        margin-left: 30px;
+      }
     }
   }
 }	

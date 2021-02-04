@@ -1,13 +1,13 @@
 <!--
- 描述: 社区报警
+ 描述: 报警数量
  作者: shixiaolei
  日期: 2021-2-4
 -->
 
 <template>
-  <div class="wrap-container sn-container leftTop"> 
+  <div class="wrap-container sn-container leftTop2"> 
     <div class="sn-content"> 
-      <div class="sn-title">社区报警</div> 
+      <div class="sn-title">报警数量</div> 
       <div class="sn-body"> 
         <div class="wrap-container"> 
           <div class="pd-main"> 
@@ -21,7 +21,7 @@
 
 <script>
 export default {
-  name: "sinan",
+  name: "alarmNumber",
   data() {
     return {
     }
@@ -30,13 +30,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.leftTop {
+.leftTop2 {
   left: 50px; 
-  top: 110px;
+  top: 750px;
   position: absolute;
 
   width: 500px; 
-  height: 620px;
+  height: 300px;
   background:url(../../assets/leftTall.png) no-repeat;
   background-size: 100% 100%;
   overflow: visible;

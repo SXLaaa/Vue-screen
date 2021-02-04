@@ -1,16 +1,16 @@
 <!--
- 描述: 监控视频
+ 描述: 图例
  作者: shixioalei
  日期: 2021-2-4
 -->
 
 <template>
-  <div class="wrap-container sn-container rightTop"> 
+  <div class="wrap-container sn-container rightBottom"> 
     <div class="sn-content"> 
-      <div class="sn-title">监控画面</div> 
+      <div class="sn-title">图例</div> 
       <div class="sn-body"> 
         <div class="wrap-container">
-          <div class="table">
+          <div class="table1">
             
           </div>
         </div> 
@@ -22,7 +22,7 @@
 <script>
 
 export default {
-  name: "seamless",
+  name: "lengend",
   components: {
   },
   data() {
@@ -45,14 +45,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.rightTop {
+.rightBottom {
   left: 1370px;
-  top: 110px;
+  top: 830px;
   position: absolute;
 
   width: 500px; 
-  height: 450px;
-  background:url(../../assets/rightTop.png) no-repeat;
+  height: 220px;
+  background:url(../../assets/rightBottom.png) no-repeat;
   background-size: 100% 100%;
   overflow: visible;
   .table {
