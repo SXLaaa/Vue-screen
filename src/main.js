@@ -4,7 +4,7 @@ import router from './router'
 import store from './store'
 import vueParticles from 'vue-particles'
 import Vcomp from './components/index'
-import Toast from './components/toast'
+
 
 import '@/assets/styles/base.scss'
 import '@/assets/styles/common.scss'
@@ -15,7 +15,10 @@ Vue.use(Vcomp)
 
 Vue.config.productionTip = false
 
-Vue.prototype.$Toast = Toast
+import Video from 'video.js'
+import 'video.js/dist/video-js.css'
+Vue.prototype.$video = Video
+
 
 
 router.beforeEach((to, from, next) => {

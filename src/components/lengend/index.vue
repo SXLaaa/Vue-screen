@@ -11,7 +11,7 @@
       <div class="sn-body"> 
         <div class="wrap-container">
           <div class="table1">
-            
+            <div id="table1"></div>
           </div>
         </div> 
       </div> 
@@ -20,7 +20,7 @@
 </template>
 
 <script>
-
+import option from './lenged'
 export default {
   name: "lengend",
   components: {
@@ -33,10 +33,15 @@ export default {
   computed: {
   },  
   mounted() {
-    
+    this.$nextTick(()=> {
+      this.initEcharts()
+    })
   },
   methods: {
-    
+    initEcharts(){
+      var myChart = echarts.init(document.getElementById('table1'));
+      myChart.setOption(option)
+    }
   },
   beforeDestroy() {
     
@@ -55,10 +60,18 @@ export default {
   background:url(../../assets/rightBottom.png) no-repeat;
   background-size: 100% 100%;
   overflow: visible;
-  .table {
+  .table1 {
     position: absolute;
     height: 100%;
     width: 100%;
+    display: flex;
+    // justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    #table1{
+      width: 90%;
+      height: 90%;
+    }
   }
 }
 </style>
