@@ -15,7 +15,7 @@
               <div id="leftTop2Echarts"></div>
             </div>
             <div class="pd-main-button">
-              <div>处理故障设备</div>
+              <div @click="dealEquipment()">处理故障设备</div>
             </div>
           </div>  
         </div> 
@@ -38,6 +38,9 @@ export default {
     })
   },
   methods:{
+    dealEquipment(){
+       this.$router.push({ path:'/equipment'})
+    },
     initEcharts(){
       var myChart = echarts.init(document.getElementById('leftTop2Echarts'));
       myChart.setOption(option)

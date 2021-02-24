@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import equipment from './modules/index'
 
 Vue.use(VueRouter)
 
@@ -31,7 +32,8 @@ const routes = [
     meta: {
       title: '公司品牌介绍'
     }
-  }
+  },
+  ...equipment
 ]
 
 const router = new VueRouter({
