@@ -7,7 +7,7 @@ const routes = [
   {
     path: '/',
     name: 'Login',
-    component: () => import('@/views/Login.vue'),
+    component: () => import('@/views/login/index'),
     meta: {
       title: '登录界面'
     }
@@ -19,7 +19,7 @@ const routes = [
   {
     path: '/home',
     name: 'Home',
-    component: () => import('@/views/Home.vue'),
+    component: () => import('@/views/home/index'),
     meta: {
       title: '首页'
     }
@@ -27,7 +27,7 @@ const routes = [
   {
     path: '/brand',
     name: 'Brand',
-    component: () => import('@/views/Brand.vue'),
+    component: () => import('@/views/brand/index'),
     meta: {
       title: '公司品牌介绍'
     }

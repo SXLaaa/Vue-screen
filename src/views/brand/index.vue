@@ -188,21 +188,21 @@ export default {
       }).then(res => {
         if (res.data) {
           if (res.data.wea_img == 'xue') {
-            this.imgSrc = require('../assets/img/brand/xue.png');
+            this.imgSrc = require('../../assets/img/brand/xue.png');
           } else if (res.data.wea_img == 'yin') {
-            this.imgSrc = require('../assets/img/brand/yin.png');
+            this.imgSrc = require('../../assets/img/brand/yin.png');
           } else if (res.data.wea_img == 'yu' || res.data.wea_img == 'bingbao') {
-            this.imgSrc = require('../assets/img/brand/yu.png');
+            this.imgSrc = require('../../assets/img/brand/yu.png');
           } else if (res.data.wea_img == 'yun') {
-            this.imgSrc = require('../assets/img/brand/yun.png');
+            this.imgSrc = require('../../assets/img/brand/yun.png');
           } else if (res.data.wea_img == 'wu') {
-            this.imgSrc = require('../assets/img/brand/wu.png');
+            this.imgSrc = require('../../assets/img/brand/wu.png');
           } else if (res.data.wea_img == 'shachen') {
-            this.imgSrc = require('../assets/img/brand/shachen.png');
+            this.imgSrc = require('../../assets/img/brand/shachen.png');
           } else if (res.data.wea_img == 'lei') {
-            this.imgSrc = require('../assets/img/brand/lei.png');
+            this.imgSrc = require('../../assets/img/brand/lei.png');
           } else {
-            this.imgSrc = require('../assets/img/brand/qing.png');
+            this.imgSrc = require('../../assets/img/brand/qing.png');
           }
           this.weatcherData = res.data;
         }
@@ -501,13 +501,13 @@ export default {
   height: 100%;
   background: #000;
   .wrap {
-    background: url(../assets/img/brand/bg.jpg) no-repeat #000;
+    background: url(../../assets/img/brand/bg.jpg) no-repeat #000;
     background-size: cover;
     line-height: 1.15;
     header {
       position: relative;
       height: 1rem;
-      background: url(../assets/img/brand/head_bg.png) no-repeat top center;
+      background: url(../../assets/img/brand/head_bg.png) no-repeat top center;
       background-size: 100% 100%;
       h2 {
         color: #7ef0ff;
@@ -653,7 +653,7 @@ export default {
           transform: translate(-50%, -50%);
           width: 6.475rem;
           height: 6.475rem;
-          background: url(../assets/img/brand/map.png) no-repeat;
+          background: url(../../assets/img/brand/map.png) no-repeat;
           background-size: 100% 100%;
           opacity: 0.3;
         }
@@ -675,7 +675,7 @@ export default {
             @extend %map-style;
             width: 8.0375rem;
             height: 8.0375rem;
-            background-image: url(../assets/img/brand/lbx.png);
+            background-image: url(../../assets/img/brand/lbx.png);
             opacity: 0.6;
             -webkit-animation: rotate 15s linear infinite;
             animation: rotate 15s linear infinite;
@@ -685,7 +685,7 @@ export default {
             @extend %map-style;
             width: 7.075rem;
             height: 7.075rem;
-            background-image: url(../assets/img/brand/jt.png);
+            background-image: url(../../assets/img/brand/jt.png);
             -webkit-animation: rotate1 10s linear infinite;
             animation: rotate1 10s linear infinite;
           }
@@ -694,7 +694,7 @@ export default {
           position: relative;
           height: 3.875rem;
           border: 1px solid rgba(25, 186, 139, 0.17);
-          background: rgba(255, 255, 255, 0.04) url(../assets/img/brand/line.png);
+          background: rgba(255, 255, 255, 0.04) url(../../assets/img/brand/line.png);
           padding: 0 0.1875rem 0;
           margin-bottom: 0.1875rem;
           &:before {

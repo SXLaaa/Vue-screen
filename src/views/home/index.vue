@@ -61,7 +61,7 @@ export default {
   height: 100%;
   .wrap {
     transform-origin: 0px 0px 0px;
-    background: url(../assets/img/bj.jpg) no-repeat;
+    background: url(../../assets/img/bj.jpg) no-repeat;
     background-size: contain;
     background-position: 50% 0;
     background-color: rgb(0, 0, 0);
@@ -77,7 +77,7 @@ export default {
       width: 100%; 
       height: 80px; 
       background-color: transparent; 
-      background: url(../assets/navBar.png) no-repeat center; 
+      background: url(../../assets/navBar.png) no-repeat center; 
       background-size:60% 70%;
       // background-position: 65% 0;
       border: none; 
