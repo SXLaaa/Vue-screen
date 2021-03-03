@@ -3,13 +3,14 @@
  作者: shixiaolei
  日期: 2021-02-3
 -->
-
 <template>
   <div class="home-container">
-  	<div class="wrap" ref="editor">
+    <div class="wrap" ref="editor">
       <div class="top">
         <div class="top-button1">监控地图</div>
         <div class="top-button2">人员地图</div>
+      </div>
+      <div id="BoxDD" ref="BoxDD">
       </div>
       <!-- 社区报警 -->
       <sinan/>
@@ -21,33 +22,36 @@
       <smartVisite/>
       <!-- 图例 -->
       <lengend/>
-      <pyramid />
+      <!-- <pyramid /> -->
     </div>
     
   </div>
 </template>
-
 <script>
 import { screenSize } from '@/assets/js/utils'
+// import './home3D'
+const getThreeJs = ()=> import('./threeJS')
 
 export default {
   name: 'Home',
   components: {},
-  data() {
-  	return {
-  		
-  	}
+  data() {return {
+
+  }
   },
   computed: {
-  	
+
   },
   created() {
   },
   mounted() {
     screenSize(this.$refs.editor);
+    this.init()
   },
   methods: {
-    
+    init(){
+      getThreeJs()
+    }
   }
 }
 </script>
@@ -70,6 +74,14 @@ export default {
     min-height: auto;
     height: 1080px;
     overflow: auto;
+    #BoxDD{
+      position:absolute;
+      top: 80px;
+      display: flex;
+      width: 100%; 
+      height: 92%;
+      overflow: auto;
+    }
     .top {
       position: absolute;
       left: 0; 
