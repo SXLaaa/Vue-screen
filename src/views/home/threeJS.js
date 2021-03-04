@@ -23,14 +23,14 @@
     var drawPoint = function () {};
 
     
-  
+  console.log('3333333')
       init();
       animate();
-  
-    /////////////初始化
+
     /* eslint-disable */
     
     function init(){
+        console.log('323232')
         var manager = new THREE.LoadingManager();
         // 包裹楼房和流光div
         container = document.createElement('div');
@@ -128,10 +128,10 @@
         canvas = document.createElement('canvas');
         // 流光画布
         canvas.id = 'glcanvas';
-        // canvas.width = window.innerWidth;
-        // canvas.height = window.innerHeight;
-        canvas.style.height = '100%';
-        canvas.style.width = '100%';
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        // canvas.style.height = '100%';
+        // canvas.style.width = '100%';
         canvas.style.position = 'fixed';
         canvas.style.top = '0px';
         canvas.style.left = '0px';
@@ -202,7 +202,7 @@
         // })
         
         loaderObj.load('/static/modelVanKe/light/line3.obj', function (object) {
-            object.scale.set(10, 10, 10);
+            object.scale.set(10, 10, 10); // 调整模型比例大小
             for (let i = 0; i < object.children.length; i++) {
                 lineInfo[i] = {}
 
@@ -231,7 +231,7 @@
                 let length = object.children[i].geometry.attributes.position.array.length / 3;
 
                 for (let j = 0; j < length; j++) {
-                    //改位置
+                    //改流光粒子位置
                     vec3.push(new THREE.Vector3(array[3 * j]*10, array[3 * j + 1]*10, array[3 * j + 2]*10))
                 }
                 let curve = new THREE.CatmullRomCurve3(vec3);
