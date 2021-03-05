@@ -9,7 +9,7 @@
     import { FXAAShader } from 'three/examples/jsm/shaders/FXAAShader.js';
     import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
     
-    var t = null;
+    // var tt = null;
     var selectedObjects = [];
     var camera, controls, scene, render, composer, effectFXAA, mouse, raycaster, vector3,
       dirLight, outlinePass, renderPass, container, buffers, canvas;
@@ -22,30 +22,25 @@
     var lineInfo = [], colors = [], positions = [];
     var drawPoint = function () {};
 
-    
-  console.log('3333333')
-      init();
-      animate();
-
+      
     /* eslint-disable */
-    
-    function init(){
+    export function init(){
         console.log('323232')
-        var manager = new THREE.LoadingManager();
         // 包裹楼房和流光div
         container = document.createElement('div');
         container.setAttribute('class','threeDiv')
-        container.style.width = '100%'
-        container.style.height = '100%'
+        container.style.width = '100%';
+        container.style.height = '100%';
         let boxThree = document.getElementById('BoxDD');
         boxThree.appendChild(container);
+        // document.body.appendChild(container);
 
-        t = setTimeout(time,1000);//开始执行
+        // tt = setTimeout(time,1000);//开始执行
         raycaster = new THREE.Raycaster();
         mouse = new THREE.Vector2();
 
         var width = window.innerWidth, height = window.innerHeight;
-        console.log(width,height)
+        // console.log(width,height)
         var k = width/height;
         camera = new THREE.PerspectiveCamera(30, k, 1, 5000000); // 透视相机
         var cameraPostionStart = new THREE.Vector3(1000, 500, 1000);
@@ -75,7 +70,6 @@
         point4.position.set(-2000, 2000, 2000);
         scene.add(point4);
 
-        var textureLoader = new THREE.TextureLoader();
         const r = 6371, starsGeometry = [new THREE.BufferGeometry(), new THREE.BufferGeometry()];
         const vertices1 = [];
         const vertices2 = [];
@@ -119,8 +113,7 @@
             antialias: true//抗锯齿
         });
         render.setPixelRatio(window.devicePixelRatio);
-        // render.setSize(width, height); // 设置画布大小
-        render.setSize(1920, 990);
+        render.setSize(window.innerWidth, window.innerHeight); // 设置画布大小
         render.shadowMap.enabled = true;
         document.body.appendChild(render.domElement);// body中插入canvas对象
         container.appendChild(render.domElement);
@@ -128,8 +121,8 @@
         canvas = document.createElement('canvas');
         // 流光画布
         canvas.id = 'glcanvas';
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
         // canvas.style.height = '100%';
         // canvas.style.width = '100%';
         canvas.style.position = 'fixed';
@@ -138,7 +131,6 @@
         canvas.style.pointerEvents = 'none';
 
         container.appendChild(canvas);
-
 
         var axesHelper = new THREE.AxesHelper(555);
         scene.add(axesHelper);
@@ -150,14 +142,17 @@
         controls.maxDistance = 80000;
         controls.minDistance = 0;
 
+
+        $(".threeDiv").children().css({"width":"100%","height":"100%"});
+
         composer = new EffectComposer(render);
         renderPass = new RenderPass(scene, camera);
-        outlinePass = new OutlinePass(new THREE.Vector2(window.innerWidth, window.innerHeight), scene, camera);
+        outlinePass = new OutlinePass(new THREE.Vector2(width, height), scene, camera);
         effectFXAA = new ShaderPass(FXAAShader);
 
         composer.addPass(renderPass);
         composer.addPass(outlinePass);
-        effectFXAA.uniforms['resolution'].value.set(1 / window.innerWidth, 1 / window.innerHeight);
+        effectFXAA.uniforms['resolution'].value.set(1 / width, 1 / height);
         composer.addPass(effectFXAA);
 
         render.domElement.addEventListener('pointermove', onPointerMove, false);
@@ -166,17 +161,16 @@
         window.addEventListener('dblclick', function () {
             flag = true;
             Fadeout();
-            pauseVid();
+            // pauseVid();
             outlinePass.selectedObjects = [];
         });
         window.addEventListener('contextmenu', function () {
-            Fadein();
+            // Fadein();
         });
         window.addEventListener('resize', onWindowResize, false);
 
 
         var loaderObj = new OBJLoader();
-        // var loaderObj = new THREE.OBJLoader();
              var mat4 = new THREE.MeshPhysicalMaterial({
                  color: 'green'
              });
@@ -199,7 +193,6 @@
                      console.log(Math.round(percentComplete, 2) + '% downloaded');
                  }
             });
-        // })
         
         loaderObj.load('/static/modelVanKe/light/line3.obj', function (object) {
             object.scale.set(10, 10, 10); // 调整模型比例大小
@@ -231,7 +224,7 @@
                 let length = object.children[i].geometry.attributes.position.array.length / 3;
 
                 for (let j = 0; j < length; j++) {
-                    //改流光粒子位置
+                    //改流光粒子位置 (流光盘大小)
                     vec3.push(new THREE.Vector3(array[3 * j]*10, array[3 * j + 1]*10, array[3 * j + 2]*10))
                 }
                 let curve = new THREE.CatmullRomCurve3(vec3);
@@ -304,7 +297,6 @@
                 positions = []
                 colors = []
             }
-
             scene.add(object);
         })
     }
@@ -345,37 +337,37 @@
         selectedObjects = [];
         selectedObjects.push(object);
     }
-    function time() {
-        clearTimeout(t);//清除定时器
-        var dt = new Date();
-        var y=dt.getYear()+1900;
-        var mm=dt.getMonth()+1;
-        var d=dt.getDate();
-        var weekday=["星期日","星期一","星期二","星期三","星期四","星期五","星期六"];
-        var day=dt.getDay();
-        var h=dt.getHours();
-        var m=dt.getMinutes();
-        var s=dt.getSeconds();
-        if(h<10){h="0"+h;}
-        if(m<10){m="0"+m;}
-        if(s<10){s="0"+s;}
-        // document.getElementById("time").innerHTML = y+"年"+mm+"月"+d+"日"+weekday[day]+" "+h+":"+m+":"+s+"";
-        t = setTimeout(time,1000); //设定定时器，循环执行
-    }
-    function Fadein(){
-        $("#div1").slideDown("slow"); //滑入
-        $("#charImg").slideDown("slow");
-    }
-    function Fadeout(){
-        $("#div1").slideUp("slow"); //滑出
-        $("#charImg").slideUp("slow");
-    }
+    // function time() {
+    //     clearTimeout(t);//清除定时器
+    //     var dt = new Date();
+    //     var y=dt.getYear()+1900;
+    //     var mm=dt.getMonth()+1;
+    //     var d=dt.getDate();
+    //     var weekday=["星期日","星期一","星期二","星期三","星期四","星期五","星期六"];
+    //     var day=dt.getDay();
+    //     var h=dt.getHours();
+    //     var m=dt.getMinutes();
+    //     var s=dt.getSeconds();
+    //     if(h<10){h="0"+h;}
+    //     if(m<10){m="0"+m;}
+    //     if(s<10){s="0"+s;}
+    //     // document.getElementById("time").innerHTML = y+"年"+mm+"月"+d+"日"+weekday[day]+" "+h+":"+m+":"+s+"";
+    //     t = setTimeout(time,1000); //设定定时器，循环执行
+    // }
+    // function Fadein(){
+    //     $("#div1").slideDown("slow"); //滑入
+    //     $("#charImg").slideDown("slow");
+    // }
+    // function Fadeout(){
+    //     $("#div1").slideUp("slow"); //滑出
+    //     $("#charImg").slideUp("slow");
+    // }
     function onPointerClick(event){
         flag = false;
         if (event.isPrimary === false) return;
         mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
         mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-        checkIntersectionClick();
+        // checkIntersectionClick();
     }
     function checkIntersectionClick(){
         if(!selectFlag){
@@ -434,7 +426,8 @@
         }
 
     }
-    function animate() {
+    export function animate() {
+      // console.log('旋转了')
         controls.autoRotate = true;
         if(!flag) {controls.autoRotate = false}
         TWEEN.update();
@@ -445,7 +438,6 @@
     function rendering() {
         const delta = new THREE.Clock().getDelta();
         controls.update(delta);
-        // TWEEN.update(delta);
         composer.render(delta);
         for (let i = 0; i < ia.view.mat4.length; i++) {
             ia.view.mat4[i] = camera.matrixWorldInverse.elements[i];
@@ -453,3 +445,6 @@
         }
         drawPoint();
     }
+
+    // init()
+    // animate()
