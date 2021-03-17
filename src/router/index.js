@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import equipment from './modules/index'
+import {equipment,person} from './modules/index'
 
 Vue.use(VueRouter)
 
@@ -33,7 +33,8 @@ const routes = [
       title: '公司品牌介绍'
     }
   },
-  ...equipment
+  ...equipment,
+  ...person,
 ]
 
 const router = new VueRouter({

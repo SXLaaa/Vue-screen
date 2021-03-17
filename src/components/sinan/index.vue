@@ -32,7 +32,7 @@
             <div class="pd-main-button">
               <div>处理社区报警</div>
             </div>
-          </div>  
+          </div>
         </div> 
       </div> 
     </div>   
@@ -45,12 +45,13 @@ export default {
   name: "sinan",
   data() {
     return {
+      type: 'home',
       forData:[
-        {id:1,name:'按需投放',value:'12',color:'rgb(79,0,12)'},
-        {id:2,name:'垃圾数量',value:'32',color:'rgb(79,0,12)'},
-        {id:3,name:'垃圾投放',value:'45',color:'rgb(79,0,12)'},
-        {id:4,name:'消防资源占用   一级',value:'12',color:'rgb(79,0,12)'},
-        {id:5,name:'消防资源占用   二级',value:'12',color:'orange'},
+        {id:1,name:'按需投放',value:'12',color:'yellow'},
+        {id:2,name:'垃圾数量',value:'32',color:'yellow'},
+        {id:3,name:'垃圾投放',value:'45',color:'yellow'},
+        {id:4,name:'消防资源占用   一级',value:'12',color:'yellow'},
+        {id:5,name:'消防资源占用   二级',value:'12',color:'yellow'},
         {id:6,name:'消防资源占用   三级',value:'89',color:'yellow'}
       ]
     }
@@ -66,7 +67,7 @@ export default {
       var myChart2 = echarts.init(document.getElementById('leftTop2'));
       myChart.setOption(option)
       myChart2.setOption(option)
-    }
+    },
   }
 }
 </script>

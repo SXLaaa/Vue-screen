@@ -1,3 +1,4 @@
 import equipment from './equipment';
+import person from './personMap';
 
-export default [...equipment];
+export {equipment,person}

@@ -7,12 +7,12 @@
   <div class="home-container">
     <div class="operation">
       <span @click="btn">隐藏图表</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <span>复位</span>
+      <span id="btnSelect" @click="fit">复位</span>
     </div>
     <div class="wrap" ref="editor">
       <div class="top">
         <div class="top-button1">监控地图</div>
-        <div class="top-button2">人员地图</div>
+        <div class="top-button2" @click="goMap">人员地图</div>
       </div>
       <!-- 3D地图 -->
       <div id="BoxDD" ref="BoxDD"></div>
@@ -58,8 +58,14 @@ export default {
     init(){
       three.init()
       three.animate()
+    },
+    goMap(){
+      this.$router.push('/person')
+    },
+    fit(){ // 3D复位
+      three.refit()
     }
-  }
+  },
 }
 </script>
 

@@ -5,7 +5,6 @@ import store from './store'
 import vueParticles from 'vue-particles'
 import Vcomp from './components/index'
 
-
 import '@/assets/styles/base.scss'
 import '@/assets/styles/common.scss'
 import '@/assets/iconfont/iconfont.css'
