@@ -8,21 +8,15 @@
     import { OutlinePass } from 'three/examples/jsm/postprocessing/OutlinePass.js';
     import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
     import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
-    import { FXAAShader } from 'three/examples/jsm/shaders/FXAAShader.js';
     
         var selectedObjects = [];
-        const radius = 6371;
-        const tilt = 0.41;
-        const rotationSpeed = 0.02;
-        var camera, controls, scene, renderer, stats, geometry, composer, mouse, raycaster, vector3,
-            dirLight, video, outlinePass, renderScene, notSelected, cameraPostionStart, bloomComposer, bloomPass, finalPass,
-            container, buffers, canvas, mixer, selectedObject;
+        var camera, controls, scene, renderer, composer, mouse, raycaster, vector3,
+            outlinePass, renderScene, notSelected, cameraPostionStart, bloomComposer, bloomPass, finalPass,
+            container, buffers, canvas, selectedObject;
         var flag = true, selectFlag = false;
-        var textureLoader = new THREE.TextureLoader();
         var clock = new THREE.Clock();
         var width = window.innerWidth, height = window.innerHeight;
     
-        var times = 0;
         var ia = Ia();
         var iaWorld = ia.world;
         ia.colorful.useSimplePoint(3);
@@ -78,6 +72,7 @@
                     notSelected[i].visible = true;
                 }
                 notSelected = [];
+            // eslint-disable-next-line no-empty
             }else {}
         }
     
@@ -431,6 +426,7 @@
         export function animate() {
             controls.autoRotate = true;
             if(!flag) {controls.autoRotate = false}
+            // eslint-disable-next-line no-undef
             TWEEN.update();
             raycaster.setFromCamera(mouse, camera);
             const delta = clock.getDelta();
@@ -448,6 +444,7 @@
          * 平滑相机
          * */
         function tweenAnimate(positionA, positionB) {
+            // eslint-disable-next-line no-undef
             new TWEEN.Tween(positionA).to(positionB, 1800).onUpdate(function (pos){
                 controls.enabled = false;
             }).onComplete(function() {
@@ -455,6 +452,7 @@
                 if(vector3){
                     camera.lookAt(vector3);
                 }
+            // eslint-disable-next-line no-undef
             }).easing(TWEEN.Easing.Cubic.InOut).start();
         }
     
@@ -583,6 +581,7 @@
                                                     vector3.z+1200));
                                             }
                                         }
+                                    // eslint-disable-next-line no-cond-assign
                                     }else if(vector3.x=vector3.y=vector3.z == 0){
                                         tweenAnimate(camera.position, new THREE.Vector3(1500, 800,
                                             1800));
@@ -593,9 +592,8 @@
                         }
                     }
                     selectFlag = true;
-                } else {
-    
-                }
+                // eslint-disable-next-line no-empty
+                } else  {}
             }
     
         }
