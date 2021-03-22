@@ -4,6 +4,10 @@ import router from './router'
 import store from './store'
 import vueParticles from 'vue-particles'
 import Vcomp from './components/index'
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+
+Vue.use(ElementUI);
 
 import '@/assets/styles/base.scss'
 import '@/assets/styles/common.scss'
@@ -18,13 +22,28 @@ import Video from 'video.js'
 import 'video.js/dist/video-js.css'
 Vue.prototype.$video = Video
 
-
-
-router.beforeEach((to, from, next) => {
-	if (to.meta.title) {
-	document.title = to.meta.title;
+import {getToken} from './utils/userToken'
+var whiteList = ['/login','/home','/person']
+router.beforeEach(async (to,from,next) => {
+	const token  = getToken()
+	if(token){
+		if(to.path === '/login'){
+				next({path:'/'}) // 跳转根路由
+		}else{
+			console.log(11)
+		}
+	}else{
+		let index = whiteList.indexOf(to.path)
+		if(index !== -1){
+				next()
+		}else{
+				next("/login")
+		}
 	}
-	next();
+})
+    
+router.afterEach(() => {
+
 })
 
 new Vue({

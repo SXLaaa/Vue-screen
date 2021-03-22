@@ -8,6 +8,7 @@ const routes = [
   {
     path: '/',
     name: 'Login',
+    redirect: '/login',
     component: () => import('@/views/login/index'),
     meta: {
       title: '登录界面'
@@ -15,7 +16,7 @@ const routes = [
   },
   {
     path: '/login',
-    redirect: '/'
+    component: () => import('@/views/login/index')
   },
   {
     path: '/home',
