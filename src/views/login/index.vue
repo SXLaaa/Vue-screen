@@ -10,37 +10,18 @@
 			<div class="some-space">
 				<div class="form">
 					<h2>大数据可视化平台</h2>
-					<div class="item">
-						<i class="iconfont icon-user"></i>
-						<input
-							autocomplete="off"
-							type="text"
-							class="input"
-							v-model="userName"
-							placeholder="请输入用户名"
-						/>
-					</div>
-					<div class="item">
-						<i class="iconfont icon-password"></i>
-						<input
-							autocomplete="off"
-							type="password"
-							class="input"
-							v-model="userPwd"
-							maxlength="20"
-							@keyup.enter="login"
-							placeholder="请输入密码"
-						/>
-					</div>
-					<button 
-						class="loginBtn"
-						:disabled="isLoginAble"
-						@click.stop="login">
-						立即登录
-					</button>
-					<!-- <div class="tip">
-						默认用户名：admin ，默认密码：123456
-					</div> -->
+					<el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="80px" size="medium" class="demo-ruleForm">
+						<el-form-item label="密码" prop="pass">
+							<el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
+						</el-form-item>
+						<el-form-item label="确认密码" prop="checkPass" style="color:white">
+							<el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
+						</el-form-item>
+						<el-form-item>
+							<el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
+							<el-button @click="resetForm('ruleForm')">重置</el-button>
+						</el-form-item>
+					</el-form>
 					<div class="touristsUpload">
 						游客登陆
 					</div>
@@ -85,9 +66,38 @@ export default {
   name: 'Login',
   components: {},
   data() {
+      var validatePass = (rule, value, callback) => {
+        if (value === '') {
+          callback(new Error('请输入密码'));
+        } else {
+          if (this.ruleForm.checkPass !== '') {
+            this.$refs.ruleForm.validateField('checkPass');
+          }
+          callback();
+        }
+      };
+      var validatePass2 = (rule, value, callback) => {
+        if (value === '') {
+          callback(new Error('请再次输入密码'));
+        } else if (value !== this.ruleForm.pass) {
+          callback(new Error('两次输入密码不一致!'));
+        } else {
+          callback();
+        }
+      };
 		return {
-			userName: '',
-			userPwd: '',
+			ruleForm: {
+				pass: '',
+				checkPass: '',
+			},
+			rules: {
+				pass: [
+					{ validator: validatePass, trigger: 'blur' }
+				],
+				checkPass: [
+					{ validator: validatePass2, trigger: 'blur' }
+				]
+			},
 			visible: false,
 			modalContent: '这是一段自定义模态框消息'
 		}
@@ -118,7 +128,20 @@ export default {
     confirm () {
       this.visible = false;
       console.log('点击确定')
-    }
+    },
+		submitForm(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            alert('submit!');
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
+      },
+      resetForm(formName) {
+        this.$refs[formName].resetFields();
+      }
   }
 }
 </script>
@@ -164,14 +187,11 @@ export default {
 			padding: 35px 30px 25px;
 			box-shadow: 0 0 25px rgba(255, 255, 255, .5);
 			border-radius: 10px;
-			.item {
-				display: flex;
-				align-items: center;
-				margin-bottom: 25px;
-				border-bottom: 1px solid #d3d7f7;
-				i {
-					color: #d3d7f7;
-					margin-right: 10px;
+			.demo-ruleForm{
+				width: 380px;
+				/deep/.el-form-item__label{
+					color: white;
+					font-weight: 300;
 				}
 			}
 			h2 {
@@ -180,16 +200,6 @@ export default {
 				font-size: 26px;
 				color: #d3d7f7;
 				padding-bottom: 35px;
-			}
-			.input {
-				font-size: 16px;
-        line-height: 30px;
-        width: 100%;
-        color: #d3d7f7;
-        outline: none;
-        border: none;
-        background-color: rgba(0, 0, 0, 0);
-        padding: 10px 0;
 			}
 			.loginBtn {
 				width: 100%;
