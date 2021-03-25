@@ -11,18 +11,21 @@
 				<div class="form">
 					<h2>大数据可视化平台</h2>
 					<el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="80px" size="medium" class="demo-ruleForm">
+						<el-form-item label="用户名" prop="name">
+							<el-input type="name" v-model="ruleForm.name" autocomplete="off"></el-input>
+						</el-form-item>
 						<el-form-item label="密码" prop="pass">
 							<el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
 						</el-form-item>
-						<el-form-item label="确认密码" prop="checkPass" style="color:white">
+						<!-- <el-form-item label="确认密码" prop="checkPass" style="color:white">
 							<el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
-						</el-form-item>
+						</el-form-item> -->
 						<el-form-item>
-							<el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
+							<el-button type="primary" @click="submitForm('ruleForm')">登陆</el-button>
 							<el-button @click="resetForm('ruleForm')">重置</el-button>
 						</el-form-item>
 					</el-form>
-					<div class="touristsUpload">
+					<div class="touristsUpload" @click="touristClick">
 						游客登陆
 					</div>
 				</div>
@@ -61,11 +64,18 @@
 </template>
 
 <script>
-
+import axios from 'axios'
 export default {
   name: 'Login',
   components: {},
   data() {
+			var validateName = (rule, value, callback) => {
+				if(value === ''){
+					callback(new Error('请输入用户名'));
+				}else{
+					callback();
+				}
+			}
       var validatePass = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('请输入密码'));
@@ -87,10 +97,14 @@ export default {
       };
 		return {
 			ruleForm: {
+				name:'',
 				pass: '',
 				checkPass: '',
 			},
 			rules: {
+				name:[
+					{ validator: validateName, trigger: 'blur' }
+				],
 				pass: [
 					{ validator: validatePass, trigger: 'blur' }
 				],
@@ -103,45 +117,46 @@ export default {
 		}
   },
   computed: {
-		isLoginAble() {
-				return !(this.userName && this.userPwd);
-			}
+
 		},
   created() {},
   mounted() {
 
   },
   methods: {
-		login () {
-			if (this.userName == 'admin' && this.userPwd == '123456') {
-					this.$router.push({
-					path: '/home'
-					})
-			} else {
-				this.$Toast({
-					content: '请输入正确的用户名和密码',
-					type: 'error',
-					// hasClose: true
-				})
-			}
-		},
     confirm () {
       this.visible = false;
       console.log('点击确定')
     },
 		submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            alert('submit!');
-          } else {
-            console.log('error submit!!');
-            return false;
-          }
-        });
-      },
-      resetForm(formName) {
-        this.$refs[formName].resetFields();
-      }
+			this.$refs[formName].validate((valid) => {
+				if (valid) {
+					console.log("ddd")
+					let params = {
+						name: this.ruleForm.name,
+						pass: this.ruleForm.pass
+					}
+					axios.get('/api/userLogin',{params}).then(res => {
+						if(res.data.data.userInfo == ""){
+							this.$message.warning("登陆失败")
+						}else{
+							let token = res.data.data.userInfo.token
+							localStorage.setItem('token',token)
+							this.$router.push('/home')
+						}
+					})
+				} else {
+					this.$message.error("请输入正确的用户名密码")
+					return false;
+				}
+			});
+		},
+		resetForm(formName) {
+			this.$refs[formName].resetFields();
+		},
+		touristClick(){
+			this.$router.push('/home')
+		}
   }
 }
 </script>

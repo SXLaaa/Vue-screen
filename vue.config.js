@@ -4,16 +4,16 @@ module.exports = {
   lintOnSave: false,
   devServer: {
     port: 8081,
-    // proxy: {
-    //   "/api": {
-    //     target: "https://api.github.com",
-    //     changeOrigin: true,
-    //     ws: false,
-    //     pathRewrite: {
-    //       "^/api": ""
-    //     }
-    //   }
-    // }
+    proxy: {
+      "/api": {
+        target: "https://www.fastmock.site/mock/e2c192dbb092225e614b35bc114b4667/bigScreen",
+        changeOrigin: true,
+        ws: false,
+        pathRewrite: {
+          "^/api": ""
+        }
+      }
+    }
   },
   configureWebpack: {
     // 把原本需要写在webpack.config.js中的配置代码 写在这里 会自动合并
