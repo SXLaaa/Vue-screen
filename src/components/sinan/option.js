@@ -33,7 +33,7 @@ tooltip: {
             },
             fontSize: '26',
             fontWeight: 'bold',
-            color: 'white'
+            color: 'yellow'
           }
         },
         emphasis: {

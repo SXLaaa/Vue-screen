@@ -50,7 +50,7 @@ const option = {
       show: true,
       axisLabel: {
           textStyle: {
-              color: '#ffffff',
+              color: 'yellow',
               fontSize: '16'
           },
           formatter: function(value) {

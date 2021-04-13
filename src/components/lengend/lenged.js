@@ -67,7 +67,8 @@ for (var i = 0; i < data.length; i++) {
       label: {
           normal: {
               textStyle: {
-                  fontSize: 14
+                fontSize: 14,
+                color:'yellow'
               }
           }
       },

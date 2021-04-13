@@ -50,6 +50,17 @@ export default {
   mounted() {
     screenSize(this.$refs.editor);
     this.init()
+    this.$nextTick(() => {
+      window.addEventListener('resize', () => { //监听浏览器窗口大小改变
+        var element = document.querySelector('.fink');
+        var element2 = document.querySelector('.canvasBook');
+        element2.style.height = "100%";
+        element2.style.width = "100%";
+
+        element.style.height = "100%";
+        element.style.width = "100%";
+      });
+    })
   },
   methods: {
     btn(){

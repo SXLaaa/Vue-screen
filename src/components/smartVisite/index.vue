@@ -12,10 +12,10 @@
         <div class="wrap-container">
           <div class="smart">
             <div class="smart-for">
-              <div>今日完成率: <span>{{one}}</span>%</div>
-              <div>更新率: <span>{{two}}</span>%</div>
-              <div>邀约数: <span>{{three}}</span>个</div>
-              <div>每日更新: <span>{{four}}</span>次</div>
+              <div>今日完成率: <span style="color:yellow">{{one}}%</span></div>
+              <div>更新率: <span style="color:yellow">{{two}}%</span></div>
+              <div>邀约数: <span style="color:yellow"> {{three}}个</span></div>
+              <div>每日更新: <span style="color:yellow">{{four}}次</span></div>
             </div>
             <div class="smart-button">
               <div>线下邀约推荐</div>

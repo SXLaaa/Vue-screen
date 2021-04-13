@@ -30,7 +30,7 @@
 
             <div class="videoList-button">
               <div class="videoList-button-div1">
-                平均在刷率: &nbsp; <span>90</span>%
+                平均在刷率: &nbsp; <span style="color:yellow">90%</span>
               </div>
               <div class="videoList-button-div2">视频记录</div>
             </div>
