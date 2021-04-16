@@ -1,15 +1,18 @@
 import * as THREE from 'three';
 import Ia from './thinkia'
 import $ from 'jquery'
-import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
+// import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
+// import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+
+import {OBJLoader} from './OBJLoader.js';
+import {MTLLoader} from './MTLLoader.js';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 import { OutlinePass } from 'three/examples/jsm/postprocessing/OutlinePass.js';
 import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
 
-import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader.js';
 import { CSS2DRenderer, CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer.js';
 
 var selectedObjects = [];
@@ -28,6 +31,9 @@ var iaWorld = ia.world;
 ia.colorful.useSimplePoint(3);
 var lineInfo = [], colors = [], positions = [];
 var drawPoint = function(){};
+var publicPath = process.env.BASE_URL
+
+console.log(process.env.BASE_URL,"路径")
 
 // 辉光参数配置
 const ENTIRE_SCENE = 0, BLOOM_SCENE = 1;
@@ -167,12 +173,11 @@ export function init() {
 
     var loaderObj = new OBJLoader();
     var mtlLoader = new MTLLoader();
-    mtlLoader.setPath('/static/modelVanke/obj0401/');
-    mtlLoader.load('louAll.mtl', function(materials) {
+    mtlLoader.load(process.env.BASE_URL+'/mode/louAll.mtl', function(materials) {
         materials.preload();
         loaderObj.setMaterials(materials);
-        loaderObj.setPath('/static/modelVanke/obj0401/');
-        loaderObj.load('louAll.obj', function(object) {
+        // loaderObj.setPath('/static/modelVanke/obj0401/');
+        loaderObj.load(process.env.BASE_URL+'/mode/louAll.obj', function(object) {
             object.position.y = -20;
             object.scale.set(0.003,0.003,0.003);
             scene.add(object)
